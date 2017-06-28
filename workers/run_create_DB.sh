@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#PBS -W group_list=bhurwitz
+#PBS -W group_list=yourlist
 #PBS -q standard
 #PBS -l select=1:ncpus=3:mem=10gb
 #PBS -l walltime=48:00:00
 #PBS -l cput=48:00:00
-#PBS -M aponsero@email.arizona.edu
+#PBS -M yourmail@email.arizona.edu
 #PBS -m bea
 
 LOG="$STDOUT_DIR/create_DB.log"
