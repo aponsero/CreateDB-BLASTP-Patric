@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#PBS -W group_list=bhurwitz
+#PBS -W group_list=yourlist
 #PBS -q standard
 #PBS -l select=3:ncpus=2:mem=4gb
 #PBS -l pvmem=235gb
 #PBS -l walltime=2:00:00
 #PBS -l cput=6:00:00
-#PBS -M aponsero@email.arizona.edu
+#PBS -M yourmail@email.arizona.edu
 #PBS -m bea
 
 LOG="$STDOUT_DIR/getPatric.log"
