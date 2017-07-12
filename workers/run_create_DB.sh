@@ -37,7 +37,7 @@ perl $RUN $GENOME_LIST $DB_FILE $FIG_LOG 2> "$ERRORLOG"
 #
 # remove similar sequences with cd-hit
 #
-export CLUSTER="c90_MyDB.faa" 
+export CLUSTER="$DB_DIR/c90_MyDB.faa" 
 export RUN="$CD_HIT -i $DB_FILE -o db90 -c 0.9 -M 10000"
 $RUN
 
