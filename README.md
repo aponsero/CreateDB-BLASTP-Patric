@@ -1,5 +1,5 @@
 # CreateDB-BLASTP-Patric
-Create a BLASTP bacterial database from a list a genomes from the Patric database
+Create a BLASTP bacterial database from a list a genomes from the Patric database. These scripts are meant to be run on an HPC cluster.
 
 Create also a FigFam log containing the list of FigFam annotation found in the genome and the corresponding protein product
 The last step of this pipeline aims to download the taxonomic informations for each genome and construct a taxonomic log featuring the genome number associated with the taxonomic informations.
