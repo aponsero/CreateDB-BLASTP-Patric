@@ -5,8 +5,8 @@
 #PBS -l cput=48:00:00
 #PBS -l place=pack:shared
 
-LOG="$STDOUT_DIR/create_DB.log"
-ERRORLOG="$STDERR_DIR/error.log"
+LOG="$STDOUT_DIR2/create_DB.log"
+ERRORLOG="$STDERR_DIR2/error.log"
 
 touch $LOG
 
