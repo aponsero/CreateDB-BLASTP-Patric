@@ -67,18 +67,18 @@ if [ $NUM_GENOMES -gt 0 ]; then
 # Sort the genomes by numerical order --> output in "sorted" file
 
         cd "$SPLIT_DIR"
-#        mapfile -t TEMP_ARRAY < $GENOME_LIST
-#        export SORTED="sorted"
-#        touch $SORTED
-#        sort -n < (printf "%s\n" "${TEMP_ARRAY[@]}") >"$SORTED"
+        mapfile -t TEMP_ARRAY < $GENOME_LIST
+        export SORTED="sorted"
+        touch $SORTED
+        sort -n < (printf "%s\n" "${TEMP_ARRAY[@]}") >"$SORTED"
 
 # Split the sorted genome list into Xfiles
 
-#        split --lines=$SPLIT_SIZE $SORTED
-         split --lines=$SPLIT_SIZE $GENOME_LIST
+        split --lines=$SPLIT_SIZE $SORTED
+       
 # delete sorted list
 
-#        rm $SORTED
+        rm $SORTED
 
         export SPLIT_LIST="split-files"
 
@@ -134,7 +134,7 @@ init_dir "$STDERR_DIR2" "$STDOUT_DIR2"
 echo " launching $SCRIPT_DIR/run_create_DB.sh in queue"
 echo "previous job ID $PREV_JOB_ID"
 
-JOB_ID=`qsub -v WORKER_DIR,SPLIT_DIR,SPLIT_LIST,STDERR_DIR2,STDOUT_DIR2,CD_HIT,CD_SIM,DB_DIR -N create_DB -e "$STDERR_DIR" -o "$STDOUT_DIR" -W depend=afterok:$PREV_JOB_ID $SCRIPT_DIR/run_create_DB.sh`
+JOB_ID=`qsub $ARGS -v WORKER_DIR,SPLIT_DIR,SPLIT_LIST,STDERR_DIR2,STDOUT_DIR2,CD_HIT,CD_SIM,DB_DIR -N create_DB -e "$STDERR_DIR" -o "$STDOUT_DIR" -W depend=afterok:$PREV_JOB_ID $SCRIPT_DIR/run_create_DB.sh`
 
 if [ "${JOB_ID}x" != "x" ]; then
         echo Job: \"$JOB_ID\"
@@ -149,28 +149,28 @@ fi
 ## 03- create taxo
 #
 
-#PROG3="03-taxo_log"
-#export STDERR_DIR3="$SCRIPT_DIR/err/$PROG3"
-#export STDOUT_DIR3="$SCRIPT_DIR/out/$PROG3"
+PROG3="03-taxo_log"
+export STDERR_DIR3="$SCRIPT_DIR/err/$PROG3"
+export STDOUT_DIR3="$SCRIPT_DIR/out/$PROG3"
 
 
-#init_dir "$STDERR_DIR3" "$STDOUT_DIR3"
+init_dir "$STDERR_DIR3" "$STDOUT_DIR3"
 
-#cd "$SPLIT_DIR"
+cd "$SPLIT_DIR"
 
 
-#export TAXDIR="$SPLIT_DIR/taxonomy"
-#init_dir "$TAXDIR"
+export TAXDIR="$SPLIT_DIR/taxonomy"
+init_dir "$TAXDIR"
 
-#export DOWNLOAD_LIST="$DB_DIR/genomes_log"
+export DOWNLOAD_LIST="$DB_DIR/genomes_log"
 
-#JOB_ID=`qsub -v WORKER_DIR,DB_DIR,SPLIT_DIR,DOWNLOAD_LIST,TAXDIR,STDERR_DIR3,STDOUT_DIR3 -N create_taxolog -e "$STDERR_DIR" -o "$STDOUT_DIR" -W "depend=afterok:$PREV_JOB_ID" $SCRIPT_DIR/run_taxo_log.sh`
+JOB_ID=`qsub $ARGS-v WORKER_DIR,DB_DIR,SPLIT_DIR,DOWNLOAD_LIST,TAXDIR,STDERR_DIR3,STDOUT_DIR3 -N create_taxolog -e "$STDERR_DIR" -o "$STDOUT_DIR" -W "depend=afterok:$PREV_JOB_ID" $SCRIPT_DIR/run_taxo_log.sh`
 
-#if [ "${JOB_ID}x" != "x" ]; then
-#        echo Job: \"$JOB_ID\"
-#else
-#        echo Problem submitting job. Job terminated.
-#        exit 1
-#fi
+if [ "${JOB_ID}x" != "x" ]; then
+        echo Job: \"$JOB_ID\"
+else
+        echo Problem submitting job. Job terminated.
+        exit 1
+fi
 
 echo "job successfully submited"
