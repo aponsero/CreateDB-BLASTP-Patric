@@ -34,7 +34,7 @@ cat $FILES_LIST | while read XFILE ; do
         cat $FILE | while read GENOME ; do
                 echo "$FILE.dir/$GENOME">>"$GENOME_LIST"
         done
-
+done
 #
 # make the MyDB.faa containing the figFam annotated cds from the genomes, without hypothetical proteins and viral cds
 #
