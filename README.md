@@ -16,7 +16,10 @@ please modify the
 
 You can also modify
   - CD_HIT = change for another CD_HIT/BIN directory
-  - MAIL_TYPE = change the mail type option. By default, "bea".
+  - BIN = change for your own bin directory.
+  
+  - CD_SIM = change if you want to modify the similarity parameter of CD-HIT. By default, set to 0.9.
+  - MAIL_TYPE = change the mail type option. By default set to "bea".
   
 ### Run ./submit
 this command will submit three jobs in queue. 
