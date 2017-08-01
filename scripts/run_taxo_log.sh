@@ -5,8 +5,8 @@
 #PBS -l cput=08:00:00
 #PBS -l place=pack:shared
 
-LOG="$STDOUT_DIR/tax.log"
-ERRORLOG="$STDERR_DIR/error.log"
+LOG="$STDOUT_DIR3/tax.log"
+ERRORLOG="$STDERR_DIR3/error.log"
 
 touch $LOG
 
