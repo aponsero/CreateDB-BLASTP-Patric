@@ -164,6 +164,9 @@ init_dir "$TAXDIR"
 
 export DOWNLOAD_LIST="$DB_DIR/genomes_log"
 
+echo " launching $SCRIPT_DIR/run_create_DB.sh in queue"
+echo "previous job ID $PREV_JOB_ID"
+
 JOB_ID=`qsub $ARGS-v WORKER_DIR,DB_DIR,SPLIT_DIR,DOWNLOAD_LIST,TAXDIR,STDERR_DIR3,STDOUT_DIR3 -N create_taxolog -e "$STDERR_DIR" -o "$STDOUT_DIR" -W "depend=afterok:$PREV_JOB_ID" $SCRIPT_DIR/run_taxo_log.sh`
 
 if [ "${JOB_ID}x" != "x" ]; then
