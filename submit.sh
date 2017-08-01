@@ -134,7 +134,7 @@ init_dir "$STDERR_DIR2" "$STDOUT_DIR2"
 echo " launching $SCRIPT_DIR/run_create_DB.sh in queue"
 echo "previous job ID $PREV_JOB_ID"
 
-JOB_ID=`qsub $ARGS -v WORKER_DIR,SPLIT_DIR,SPLIT_LIST,STDERR_DIR2,STDOUT_DIR2,CD_HIT,CD_SIM,DB_DIR -N create_DB -e "$STDERR_DIR" -o "$STDOUT_DIR" -W depend=afterok:$PREV_JOB_ID $SCRIPT_DIR/run_create_DB.sh`
+JOB_ID=`qsub $ARGS -v WORKER_DIR,SPLIT_DIR,SPLIT_LIST,STDERR_DIR2,STDOUT_DIR2,CD_HIT,CD_SIM,DB_DIR -N create_DB -e "$STDERR_DIR2" -o "$STDOUT_DIR2" -W depend=afterok:$PREV_JOB_ID $SCRIPT_DIR/run_create_DB.sh`
 
 if [ "${JOB_ID}x" != "x" ]; then
         echo Job: \"$JOB_ID\"
@@ -164,10 +164,10 @@ init_dir "$TAXDIR"
 
 export DOWNLOAD_LIST="$DB_DIR/genomes_log"
 
-echo " launching $SCRIPT_DIR/run_create_DB.sh in queue"
+echo " launching $SCRIPT_DIR/run_taxo_log.sh in queue"
 echo "previous job ID $PREV_JOB_ID"
 
-JOB_ID=`qsub $ARGS-v WORKER_DIR,DB_DIR,SPLIT_DIR,DOWNLOAD_LIST,TAXDIR,STDERR_DIR3,STDOUT_DIR3 -N create_taxolog -e "$STDERR_DIR" -o "$STDOUT_DIR" -W "depend=afterok:$PREV_JOB_ID" $SCRIPT_DIR/run_taxo_log.sh`
+JOB_ID=`qsub $ARGS-v WORKER_DIR,DB_DIR,SPLIT_DIR,DOWNLOAD_LIST,TAXDIR,STDERR_DIR3,STDOUT_DIR3 -N create_taxolog -e "$STDERR_DIR3" -o "$STDOUT_DIR3" -W "depend=afterok:$PREV_JOB_ID" $SCRIPT_DIR/run_taxo_log.sh`
 
 if [ "${JOB_ID}x" != "x" ]; then
         echo Job: \"$JOB_ID\"
