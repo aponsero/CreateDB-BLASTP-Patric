@@ -49,22 +49,22 @@ if (open(my $fout, '>', $taxo_log)) {
 	print "taxo ID : $taxID\n";
 	my $url= $eFetchprefix.$taxID.$eFetchpostfix;
 	print "url : $url\n";
-	#my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-	#my $req = HTTP::Request->new("GET", $url);
-	#my $rep = $ua->request($req);
+	my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
+	my $req = HTTP::Request->new("GET", $url);
+	my $rep = $ua->request($req);
 	
-	#if (! defined $rep){
-	#	warn "can't get $url";
-	#}else {	
+	if (! defined $rep){
+		warn "can't get $url";
+	}else {	
 		my $filenameexport = $tax_dir."/".$genomeID.'taxo.xml';
            	print "create file : $filenameexport\n";
  
-        	#if (open(my $fhe, '>', $filenameexport)) {
-        	#	print $fhe $rep->content;
-        	#	close $fhe;
-		#} else {
-		#	warn "Could not open file '$filenameexport' $!";
-		#}
+        	if (open(my $fhe, '>', $filenameexport)) {
+        		print $fhe $rep->content;
+        		close $fhe;
+		} else {
+			warn "Could not open file '$filenameexport' $!";
+		}
 
 		my $dom = XML::LibXML->load_xml(location => $filenameexport);
 		my $taxClass='unclassified';
@@ -90,7 +90,7 @@ if (open(my $fout, '>', $taxo_log)) {
 		}
 		print "in $taxo_log :: $genomeID  $taxKingdom     $taxPhylum      $taxClass\n";
 		print $fout "$genomeID	$taxKingdom	$taxPhylum	$taxClass\n";	
-	#}
+	}
 
 
 	}	
