@@ -11,11 +11,6 @@ if [[ ! -f "$GENOME_LIST" ]]; then
     exit 1
 fi
 
-if [[ ! "$GENOME_LIST" ]]; then
-    echo "$FGENOME_LIST does not exist. Please provide a list of ID to process Job terminated."
-    exit 1
-fi
-
 if [[ ${#CD_SIM} -lt 1 ]]; then
   echo "Incorrect similarity value for CD_SIM parameter. Please correct specified parameter in config file. Job terminated."
   exit 1
